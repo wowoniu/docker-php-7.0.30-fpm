@@ -6,6 +6,10 @@ RUN echo -e "https://mirrors.ustc.edu.cn/alpine/v3.7/main\nhttps://mirrors.ustc.
 
 #安装拓展
 RUN apk update && apk add  \
+	    freetype \
+	    libjpeg-turbo \
+	    freetype-dev \
+	    libjpeg-turbo-dev \
             libpng \
             libpng-dev \
             libxml2 \
@@ -17,7 +21,13 @@ RUN apk update && apk add  \
             libmcrypt \
             libmcrypt-dev
 
-RUN docker-php-ext-install gd \
+RUN  docker-php-ext-configure gd \
+	    --with-gd \
+	    --with-freetype-dir=/usr/include/ \
+	    --with-png-dir=/usr/include/ \
+	    --with-jpeg-dir=/usr/include/ && \
+	NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \    
+	&& docker-php-ext-install -j${NPROC} gd \
 	&& docker-php-ext-install mysqli \
 	&& docker-php-ext-install pdo_mysql \
 	&& docker-php-ext-install zip \
