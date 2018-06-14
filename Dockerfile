@@ -35,7 +35,8 @@ RUN  docker-php-ext-configure gd \
 	&& docker-php-ext-install xsl \
 	&& docker-php-ext-install intl \
 	&& docker-php-ext-install bcmath \
-	&& docker-php-ext-install mcrypt
+	&& docker-php-ext-install mcrypt \
+	&& docker-php-ext-install opcache
 
 #安装PHP COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php \
