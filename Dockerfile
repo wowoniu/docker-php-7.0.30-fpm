@@ -19,7 +19,9 @@ RUN apk update && apk add  \
             icu \
             icu-dev \
             libmcrypt \
-            libmcrypt-dev
+            libmcrypt-dev \
+	    && pecl install swoole \
+	    && docker-php-ext-enable swoole
 
 RUN  docker-php-ext-configure gd \
 	    --with-gd \
