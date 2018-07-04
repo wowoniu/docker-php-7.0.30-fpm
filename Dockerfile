@@ -25,7 +25,9 @@ RUN apk update && apk add  \
 	    make \
 	    autoconf \
 	    && pecl install swoole \
-	    && docker-php-ext-enable swoole
+	    && docker-php-ext-enable swoole \
+	    && pecl install xdebug-2.6.0 \
+	    && docker-php-ext-enable xdebug
 
 RUN  docker-php-ext-configure gd \
 	    --with-gd \
